@@ -6,7 +6,7 @@ The RGB values of these colours were sourced from [Stencil](http://stencil.wiki/
 
 To use this add-on with openFrameworks:
   - Download the repository;
-  - Move the folder `ofxRisographColours` to `{OF_ROOT}/addons/`;
+  - Move the `src` folder to `{OF_ROOT}/addons/ofxRisographColours/`;
   - Add ofxRisographColours to your project using the openFrameworks project generator.
   
 ## Usage
