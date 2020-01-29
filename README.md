@@ -16,7 +16,7 @@ The colours are stored in an `std::unordered_map`, so colours can be retrieved q
 ```
 #include "ofxRisographColours.hpp"
 
-ofColor colour = ofxRisographColours.get("mint");
+ofColor colour = ofxRisographColours::get("mint");
 
 ofSetColor(colour);
 ```
@@ -28,7 +28,7 @@ A random selection method, which runs in constant time, is included too.
 ```
 #include "ofxRisographColours.hpp"
 
-ofColor colour = ofxRisographColours.random();
+ofColor colour = ofxRisographColours::random();
 
 ofSetColor(colour);
 ```
