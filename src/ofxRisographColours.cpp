@@ -1,6 +1,6 @@
 #include "ofxRisographColours.hpp"
 
-const unordered_map<string, ofColor> ofxRisographColours::colors = init_map();
+const unordered_map<string, ofColor> ofxRisographColours::colours = init_map();
 
 const unordered_map<string, ofColor> ofxRisographColours::init_map()
 {
@@ -95,31 +95,31 @@ const unordered_map<string, ofColor> ofxRisographColours::init_map()
     return um;
 }
 
-/// \brief Retrieve a colour by name.
-
-ofColor ofxRisographColours::get(std::string colour)
+ofColor ofxRisographColours::get(const int index) noexcept(false)
 {
-    auto get = colors.find(colour);
+    return std::next(colours.begin(), index)->second;
+}
 
-    if (get != colors.end())
+ofColor ofxRisographColours::get(const std::string colour)
+{
+    const auto get = colours.find(colour);
+
+    if (get != colours.end())
         
         return get->second;
     
     throw "Key not found!";
 }
 
-/// \brief  Return an element from the unordered map by selecting a random, non-empty bucket,
-///         and a random offset within the bounds of the selected bucket.
-/// \author 'sbabbi' <https://stackoverflow.com/a/27027557>
-
 ofColor ofxRisographColours::random()
 {
-    int bucket, bucket_size;
+    int    bucket;
+    size_t bucket_size;
     
-    do    bucket = ofRandom(colors.bucket_count());
-    while ((bucket_size = colors.bucket_size(bucket)) == 0);
+    do    bucket = ofRandom(colours.bucket_count());
+    while ((bucket_size = colours.bucket_size(bucket)) == 0);
 
-    auto colour = std::next(colors.begin(bucket), ofRandom(bucket_size));
-    
+    const auto colour = std::next(colours.begin(bucket), ofRandom(bucket_size));
+
     return colour->second;
 }
