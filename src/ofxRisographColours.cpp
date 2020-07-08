@@ -100,15 +100,14 @@ ofColor ofxRisographColours::get(const int index) noexcept(false)
     return std::next(colours.begin(), index)->second;
 }
 
-ofColor ofxRisographColours::get(const std::string colour)
+ofColor ofxRisographColours::get(const std::string colour) noexcept(false)
 {
     const auto get = colours.find(colour);
 
     if (get != colours.end())
-        
         return get->second;
     
-    throw "Key not found!";
+    throw "[ofxRisographColours] The given colour name could not be found.";
 }
 
 ofColor ofxRisographColours::random()
