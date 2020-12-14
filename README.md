@@ -7,27 +7,38 @@ The RGB values of these colours were sourced from [Stencil](http://stencil.wiki/
 To use this add-on with openFrameworks:
   - Download the repository;
   - Move the `src` folder to `{OF_ROOT}/addons/ofxRisographColours/`;
-  - Add ofxRisographColours to your project using the openFrameworks project generator.
+  - Add ofxRisographColours as an addon to your project using the openFrameworks project generator.
+  
+See the included Xcode project, 'ofxRisographColoursDemo', for a simple usage demo.
   
 ## Usage
 
-The colours are stored in an `std::unordered_map`, so colours can be retrieved quickly using their name as a key.
+Each colour is stored as a static constant.
 
 ```
 #include "ofxRisographColours.hpp"
 
-ofColor colour = ofxRisographColours::get("mint");
+ofColor colour = ofxRisographColours::bisque;
 
 ofSetColor(colour);
 ```
 
-The colour names are written in "snake case" (e.g. `hunter_green`, `spruce`, `risofederal_blue`, etc.).
-
-Colours can be selected randomly, too.
+Colours can also be retrieved from the class's `std::unordered_map` using either an index or the colour's name as a key.
 
 ```
-#include "ofxRisographColours.hpp"
+// The upper bound for colour indices
+const int upperBound = ofxRisographColours::getNumberOfColours();
 
+// Retrieve by index
+ofxRisographColours::get(25);
+
+// Retrieve by name
+ofxRisographColours::get("mint");
+```
+
+Colours can be obtained randomly using the `random` method.
+
+```
 ofColor colour = ofxRisographColours::random();
 
 ofSetColor(colour);
