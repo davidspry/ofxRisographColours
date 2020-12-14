@@ -2,7 +2,7 @@
 
 An add-on for [openFrameworks](https://github.com/openframeworks/openFrameworks) that provides a library of Risograph ink colours as `ofColor`.
 
-The RGB values of these colours were sourced from [Stencil](http://stencil.wiki/colors), although I added an off-white colour to the list.
+The RGB values of these colours were sourced from [Stencil](http://stencil.wiki/colors).
 
 To use this add-on with openFrameworks:
   - Download the repository;
@@ -21,9 +21,9 @@ ofColor colour = ofxRisographColours::get("mint");
 ofSetColor(colour);
 ```
 
-Please note that the colour names are written in "snake case" (e.g. `hunter_green`, `spruce`, `risofederal_blue`, etc.)
+The colour names are written in "snake case" (e.g. `hunter_green`, `spruce`, `risofederal_blue`, etc.).
 
-A random selection method, which runs in constant time, is included too.
+Colours can be selected randomly, too.
 
 ```
 #include "ofxRisographColours.hpp"
