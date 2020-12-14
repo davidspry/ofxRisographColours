@@ -3,28 +3,27 @@
 void ofxRisographColoursDemo::draw()
 {
     ofSetRectMode(OF_RECTMODE_CENTER);
-    const float x = ofGetWidth()  * 0.5f;
-    const float y = ofGetHeight() * 0.5f;
-    const float w = 200.f;
-    const float h = 450.f;
-
-    /// 1. Look-up by name
-    const ofRectangle rl = {x - w, y, w, h};
-    ofSetColor(ofxRisographColours::get("crimson"));
-    ofDrawRectangle(rl);
+    const auto x = ofGetWidth () * 0.5f;
+    const auto y = ofGetHeight() * 0.5f;
+    const auto r = ofRectangle(x, y, 600.f, 450.f);
+    const auto rectangles = subdivide(r, 0, 4);
     
-    /// 2. Random colours
-    const ofRectangle rm = {x, y, w, h};
-    const auto rectangles = subdivide(rm, 0, 6);
-
-    for (auto& r : rectangles)
+    /// 1. Look-up by name
+    ofSetColor(ofxRisographColours::get("crimson"));
+    ofDrawRectangle(rectangles.at(0));
+    
+    /// 2. Look-up by index
+    ofSetColor(ofxRisographColours::get(42));
+    ofDrawRectangle(rectangles.at(1));
+    
+    /// 3. Random colours
+    for (auto& r : subdivide(rectangles.at(2), 0, 6))
     {
         ofSetColor(ofxRisographColours::random());
         ofDrawRectangle(r);
     }
     
-    /// 3. Access as constant
-    const ofRectangle rr = {x + w, y, w, h};
+    /// 4. Access as constant
     ofSetColor(ofxRisographColours::sky_blue);
-    ofDrawRectangle(rr);
+    ofDrawRectangle(rectangles.at(3));
 }

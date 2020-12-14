@@ -97,28 +97,32 @@ const unordered_map<std::string, const ofColor*> ofxRisographColours::init_map()
 
 const ofColor ofxRisographColours::get(const int index) noexcept(false)
 {
+    if (!(index < getNumberOfColours() && index >= 0))
+        throw std::out_of_range(INDEX_ERROR);
+
     return *(std::next(colours.begin(), index)->second);
 }
 
 const ofColor ofxRisographColours::get(const std::string colour) noexcept(false)
 {
-    const auto get = colours.find(colour);
-
-    if (get != colours.end())
-        return *(get->second);
+    const auto target = colours.find(colour);
+    const bool exists = target != colours.end();
     
-    throw std::out_of_range("[ofxRisographColours] The given colour name could not be found.");
+    if (!exists)
+        throw std::out_of_range(KEY_ERROR);
+    
+    return *(target->second);
+}
+
+const int ofxRisographColours::getNumberOfColours() noexcept
+{
+    return colours.size();
 }
 
 const ofColor ofxRisographColours::random()
 {
-    int    bucket;
-    size_t bucket_size;
-    
-    do    bucket = ofRandom(colours.bucket_count());
-    while ((bucket_size = colours.bucket_size(bucket)) == 0);
+    const auto upperBound = getNumberOfColours();
+    const auto choice     = static_cast<int>(ofRandom(upperBound));
 
-    const auto colour = std::next(colours.begin(bucket), ofRandom(bucket_size));
-
-    return *(colour->second);
+    return get(choice);
 }

@@ -28,7 +28,7 @@ private:
              subdivision.scale(sx, sy);
         else subdivision.scaleFromCenter(sx, sy);
 
-        for (auto k = 0; k < subdivisions; ++k)
+        for (int k = subdivisions - 1; k >= 0; --k)
         {
             ofRectangle r = subdivision;
             r.translate(k * dx, k * dy);

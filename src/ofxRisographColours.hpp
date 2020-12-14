@@ -2,6 +2,9 @@
 
 #include "ofMain.h"
 
+#define   KEY_ERROR "[ofxRisographColours] The given colour name could not be found."
+#define INDEX_ERROR "[ofxRisographColours] The given index is out of range."
+
 /// \brief A library of colours based on Risograph inks represented as ofColor objects.
 
 class ofxRisographColours
@@ -12,20 +15,20 @@ private:
 
 public:
     /// \brief  Retrieve a colour by name.
-    /// \return The corresponding ofColor.
     /// \throw  An exception will be thrown if the given colour name cannot be found.
  
     [[nodiscard]] static const ofColor get(const std::string colour) noexcept(false);
     
     /// \brief  Retrieve a colour by index.
-    /// \return The corresponding ofColor.
     /// \throw  An exception will be thrown if a colour cannot be found at the given index.
     
-    [[nodiscard]] static const ofColor get(const int index) noexcept(false);
+    [[nodiscard]] inline static const ofColor get(const int index) noexcept(false);
+    
+    /// \brief  Retrieve the number of available colours.
+    
+    [[nodiscard]] inline static const int getNumberOfColours() noexcept;
     
     /// \brief  Retrieve a randomly selected colour.
-    /// \return A randomly selected ofColor.
-    /// \author 'sbabbi' <https://stackoverflow.com/a/27027557>
 
     [[nodiscard]] static const ofColor random();
 
