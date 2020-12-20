@@ -2,36 +2,39 @@
 
 #include "ofMain.h"
 
-#define CLASS_LABEL "[ofxRisographColours]"
-#define COLOR_ERROR CLASS_LABEL " The given colour name could not be found."
-#define INDEX_ERROR CLASS_LABEL " The given index is out of range."
-
-/// \brief A library of colours based on Risograph inks represented as ofColor objects.
+/// @brief A library of `ofColor` objects based on Risograph inks.
 
 class ofxRisographColours
 {
-private:
-    static const unordered_map<std::string, const ofColor*> colours;
-    static const unordered_map<std::string, const ofColor*> init_map();
-
 public:
-    /// \brief  Retrieve a colour by name.
-    /// \throw  An exception will be thrown if the given colour name cannot be found.
- 
-    [[nodiscard]] static const ofColor get(const std::string colour) noexcept(false);
+    /// @brief Retrieve a colour by index.
+    /// @param index The index of the `ofColor` to be returned.
+    /// @throw An exception will be thrown if the given index is out of range.
     
-    /// \brief  Retrieve a colour by index.
-    /// \throw  An exception will be thrown if a colour cannot be found at the given index.
-    
-    [[nodiscard]] inline static const ofColor get(const int index) noexcept(false);
-    
-    /// \brief  Retrieve the number of available colours.
-    
-    [[nodiscard]] inline static const int getNumberOfColours() noexcept;
-    
-    /// \brief  Retrieve a randomly selected colour.
+    [[nodiscard]] inline static const ofColor get(const int index) noexcept(false)
+    {
+        if (!(index < getNumberOfColours() && index >= 0))
+            throw std::out_of_range("The given index is out of range.");
 
-    [[nodiscard]] static const ofColor random();
+        return *(colours[index]);
+    }
+    
+    /// @brief Retrieve a randomly selected colour.
+
+    [[nodiscard]] inline static const ofColor random() noexcept
+    {
+        const int limit = getNumberOfColours();
+        const int index = static_cast<int>(ofRandom(limit));
+
+        return get(index);
+    }
+
+    /// @brief Retrieve the number of available colours.
+    
+    [[nodiscard]] inline static const int getNumberOfColours() noexcept
+    {
+        return static_cast<int>(colours.size());
+    }
 
 public:
     static const ofColor black;
@@ -115,4 +118,7 @@ public:
     static const ofColor fluorescent_red;
     static const ofColor fluorescent_green;
     static const ofColor off_white;
+    
+private:
+    static const std::array<const ofColor*, 81> colours;
 };
