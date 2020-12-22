@@ -1,3 +1,5 @@
+![ofxRisographColours](Banner.jpg)
+
 # ofxRisographColours
 
 An add-on for [openFrameworks](https://github.com/openframeworks/openFrameworks) that provides a library of Risograph ink colours as `ofColor`.
