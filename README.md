@@ -15,7 +15,7 @@ See the included Xcode project, 'ofxRisographColoursDemo', for a simple usage de
 
 Each colour is stored as a static constant.
 
-```
+```cpp
 #include "ofxRisographColours.hpp"
 
 ofColor colour = ofxRisographColours::sky_blue;
@@ -25,7 +25,7 @@ ofSetColor(colour);
 
 Colours can also be retrieved by index.
 
-```
+```cpp
 // The upper bound for colour indices
 const int upperBound = ofxRisographColours::getNumberOfColours();
 
@@ -35,10 +35,10 @@ ofxRisographColours::get(25);
 
 A randomly selected colour can be obtained using the `random` method.
 
-```
-ofColor colour = ofxRisographColours::random();
+```cpp
+ofColor randomColour = ofxRisographColours::random();
 
-ofSetColor(colour);
+ofSetColor(randomColour);
 ```
 
 ## Colour indices
